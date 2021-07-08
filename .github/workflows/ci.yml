@@ -79,8 +79,13 @@ jobs:
       run: |
         pip install nbdev jupyter
         pip install .
+    - name: Execute the notebooks 📖
+      run: |
+        pip install nbconvert>=6.0.0  # NOTE: notebook execution issue
+        jupyter nbconvert --execute --inplace src/*.ipynb
     - name: Build 🔧 the docs 📖
       run: |
+        pip install nbdev  # NOTE: notebook execution issue
         nbdev_build_docs
         cp LICENSE docs/
         cp README.md docs/
