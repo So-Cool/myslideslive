@@ -6,8 +6,8 @@ title: Interact with SlidesLive
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "This module implements easy interaction with [SlidesLive]."
-description: "This module implements easy interaction with [SlidesLive]."
+summary: "This module implements easy interaction with <a href='https://slideslive.com/'>SlidesLive</a>."
+description: "This module implements easy interaction with <a href='https://slideslive.com/'>SlidesLive</a>."
 nb_path: "src/slideslive.ipynb"
 ---
 <!--
@@ -194,7 +194,7 @@ nb_path: "src/slideslive.ipynb"
  &#39;subtitles&#39;: [{&#39;name&#39;: &#39;English&#39;,
    &#39;language&#39;: &#39;en&#39;,
    &#39;subtitles_id&#39;: 56748,
-   &#39;webvtt_url&#39;: &#39;https://slideslive-video-subtitles.s3.amazonaws.com/56748/subtitles.vtt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIXRWKI3HCASN5BNQ%2F20210707%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20210707T154150Z&amp;X-Amz-Expires=86400&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=0e4b8e7677724cafb66e405761ac8e1804d7c72017544a0a8d8e8727b83ea095&#39;}]}</pre>
+   &#39;webvtt_url&#39;: &#39;https://slideslive-video-subtitles.s3.amazonaws.com/56748/subtitles.vtt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIXRWKI3HCASN5BNQ%2F20210708%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20210708T195045Z&amp;X-Amz-Expires=86400&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=e159c2407c2deb46eaf44247b5d2ad95ae115a399d7e107e7faa314d804431f0&#39;}]}</pre>
 </div>
 
 </div>
@@ -216,173 +216,9 @@ nb_path: "src/slideslive.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="parse_slide_xml" class="doc_header"><code>parse_slide_xml</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_slide_xml</code>(<strong><code>xml</code></strong>, <strong><code>mode</code></strong>=<em><code>'string'</code></em>)</p>
+<h4 id="get_slide_metadata" class="doc_header"><code>get_slide_metadata</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L100" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_slide_metadata</code>(<strong><code>sl_meta_url</code></strong>, <strong><code>approach</code></strong>=<em><code>'json'</code></em>)</p>
 </blockquote>
-<p>Parse the SlidesLive slide XML metadata.</p>
-<p><code>mode</code> can either be <code>string</code> or <code>file</code>.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This function processes the XML representation of SlidesLive slides metadata
-and returns its JSON representation.
-This XML structure can either be read from a file (<code>mode='file'</code>) or a string
-(<code>mode='string'</code>, <em>default</em>).</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sl_xml</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">&lt;videoContent&gt;</span>
-<span class="s1">  &lt;slide&gt;</span>
-<span class="s1">    &lt;orderId&gt;1&lt;/orderId&gt;</span>
-<span class="s1">    &lt;timeSec&gt;0&lt;/timeSec&gt;</span>
-<span class="s1">    &lt;time&gt;0&lt;/time&gt;</span>
-<span class="s1">    &lt;slideName&gt;00001&lt;/slideName&gt;</span>
-<span class="s1">  &lt;/slide&gt;</span>
-<span class="s1">  &lt;slide&gt;</span>
-<span class="s1">    &lt;orderId&gt;2&lt;/orderId&gt;</span>
-<span class="s1">    &lt;timeSec&gt;1382&lt;/timeSec&gt;</span>
-<span class="s1">    &lt;time&gt;1382073&lt;/time&gt;</span>
-<span class="s1">    &lt;slideName&gt;00002&lt;/slideName&gt;</span>
-<span class="s1">  &lt;/slide&gt;</span>
-<span class="s1">&lt;/videoContent&gt;</span>
-<span class="s1">&#39;&#39;&#39;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">parse_slide_xml</span><span class="p">(</span><span class="n">sl_xml</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[{&#39;orderId&#39;: &#39;1&#39;, &#39;timeSec&#39;: &#39;0&#39;, &#39;time&#39;: &#39;0&#39;, &#39;slideName&#39;: &#39;00001&#39;},
- {&#39;orderId&#39;: &#39;2&#39;, &#39;timeSec&#39;: &#39;1382&#39;, &#39;time&#39;: &#39;1382073&#39;, &#39;slideName&#39;: &#39;00002&#39;}]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">xml_file</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w+b&#39;</span><span class="p">)</span>
-<span class="n">xml_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sl_xml</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-<span class="n">xml_file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">parse_slide_xml</span><span class="p">(</span><span class="n">xml_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[{&#39;orderId&#39;: &#39;1&#39;, &#39;timeSec&#39;: &#39;0&#39;, &#39;time&#39;: &#39;0&#39;, &#39;slideName&#39;: &#39;00001&#39;},
- {&#39;orderId&#39;: &#39;2&#39;, &#39;timeSec&#39;: &#39;1382&#39;, &#39;time&#39;: &#39;1382073&#39;, &#39;slideName&#39;: &#39;00002&#39;}]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">xml_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_slide_metadata" class="doc_header"><code>get_slide_metadata</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L99" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_slide_metadata</code>(<strong><code>sl_meta_url</code></strong>, <strong><code>approach</code></strong>=<em><code>'json'</code></em>)</p>
-</blockquote>
-<p>Processess metadata of slides associated with a SlidesLive presentation.</p>
+<p>Processes metadata of slides associated with a SlidesLive presentation.</p>
 <p><code>approach</code> is one of <code>json</code> or <code>xml</code>.
 It specifies the strategy for extracting slide metadata.</p>
 
@@ -405,7 +241,7 @@ It specifies the strategy for extracting slide metadata.</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This function extracts the synchronisation between slide imagess and video presentation.
+<p>This function extracts the synchronisation between slide images and video presentation.
 This information can either be pulled from XML (<code>approach='xml'</code>) or
 JSON (<code>approach='json'</code>, <em>default</em>) format.</p>
 
@@ -459,7 +295,7 @@ JSON (<code>approach='json'</code>, <em>default</em>) format.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_urls" class="doc_header"><code>get_urls</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L125" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_urls</code>(<strong><code>video_id</code></strong>, <strong><code>slide_meta</code></strong>, <strong><code>slide_type</code></strong>=<em><code>'big'</code></em>, <strong><code>slide</code></strong>=<em><code>(None, None)</code></em>, <strong><code>time</code></strong>=<em><code>(None, None)</code></em>)</p>
+<h4 id="get_urls" class="doc_header"><code>get_urls</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L126" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_urls</code>(<strong><code>video_id</code></strong>, <strong><code>slide_meta</code></strong>, <strong><code>slide_type</code></strong>=<em><code>'big'</code></em>, <strong><code>slide</code></strong>=<em><code>(None, None)</code></em>, <strong><code>time</code></strong>=<em><code>(None, None)</code></em>)</p>
 </blockquote>
 <p>Composes a list of URLs for slides of a given SlidesLive presentation.</p>
 <p><code>video_id</code> specifies the ID of a SlidesLive presentation.
@@ -553,7 +389,7 @@ https://cdn.slideslive.com/data/presentations/38956531/slides/big/01163.jpg
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="download_slides" class="doc_header"><code>download_slides</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L218" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>download_slides</code>(<strong><code>url_list</code></strong>, <strong><code>sleep_time</code></strong>=<em><code>0.2</code></em>, <strong><code>jobs</code></strong>=<em><code>16</code></em>, <strong><code>directory</code></strong>=<em><code>None</code></em>, <strong><code>technique</code></strong>=<em><code>'python'</code></em>)</p>
+<h4 id="download_slides" class="doc_header"><code>download_slides</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L219" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>download_slides</code>(<strong><code>url_list</code></strong>, <strong><code>sleep_time</code></strong>=<em><code>0.2</code></em>, <strong><code>jobs</code></strong>=<em><code>16</code></em>, <strong><code>directory</code></strong>=<em><code>None</code></em>, <strong><code>technique</code></strong>=<em><code>'python'</code></em>)</p>
 </blockquote>
 <p>Downloads files from a list of URLs (<code>url_list</code>).</p>
 <p>The destination directory is either <code>slides</code> created
@@ -663,7 +499,7 @@ and use the <code>technique='wget+parallel'</code> option.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ffmpeg_concat_script" class="doc_header"><code>ffmpeg_concat_script</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L289" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ffmpeg_concat_script</code>(<strong><code>slide_meta</code></strong>, <strong><code>slide_folder</code></strong>=<em><code>None</code></em>, <strong><code>last_duration</code></strong>=<em><code>None</code></em>, <strong><code>slide</code></strong>=<em><code>(None, None)</code></em>, <strong><code>time</code></strong>=<em><code>(None, None)</code></em>)</p>
+<h4 id="ffmpeg_concat_script" class="doc_header"><code>ffmpeg_concat_script</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L290" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ffmpeg_concat_script</code>(<strong><code>slide_meta</code></strong>, <strong><code>slide_folder</code></strong>=<em><code>None</code></em>, <strong><code>last_duration</code></strong>=<em><code>None</code></em>, <strong><code>slide</code></strong>=<em><code>(None, None)</code></em>, <strong><code>time</code></strong>=<em><code>(None, None)</code></em>)</p>
 </blockquote>
 <p>Builds an ffmpeg frame concatination string from slide metadata.
 Since the duration of the very last slide cannot be inferred,
@@ -739,25 +575,14 @@ See the <a href="/myslideslive/slideslive.html#compose_ffmpeg_video"><code>compo
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg">/var/folders/d0/9mvcgn8503s6975cz1p09rmc0000gn/T/ipykernel_71536/3998470777.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span>     slides_metadata<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span>     slide_folder<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;my_slides_dir&#39;</span><span class="ansi-blue-fg">,</span>
-<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg">     slide=(793, 794))
-</span><span class="ansi-green-intense-fg ansi-bold">      5</span> 
-<span class="ansi-green-intense-fg ansi-bold">      6</span> print<span class="ansi-blue-fg">(</span>my_slides_ffmpeg<span class="ansi-blue-fg">)</span>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>file &#39;/Users/kacper/Desktop/spare/mySlidesLive/src/my_slides_dir/00793.jpg&#39;
+duration 29.023
+file &#39;/Users/kacper/Desktop/spare/mySlidesLive/src/my_slides_dir/00794.jpg&#39;
+duration 1.994
 
-<span class="ansi-green-fg">/var/folders/d0/9mvcgn8503s6975cz1p09rmc0000gn/T/ipykernel_71536/3164267983.py</span> in <span class="ansi-cyan-fg">ffmpeg_concat_script</span><span class="ansi-blue-fg">(slide_meta, slide_folder, last_duration, slide, time)</span>
-<span class="ansi-green-intense-fg ansi-bold">     48</span>         slide_folder <span class="ansi-blue-fg">=</span> os<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">.</span>join<span class="ansi-blue-fg">(</span>os<span class="ansi-blue-fg">.</span>getcwd<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;slides&#39;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     49</span>     <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> os<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">.</span>exists<span class="ansi-blue-fg">(</span>slide_folder<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">or</span> <span class="ansi-green-fg">not</span> os<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">.</span>isdir<span class="ansi-blue-fg">(</span>slide_folder<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---&gt; 50</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;Given directory does not exist: {slide_folder}.&#39;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     51</span> 
-<span class="ansi-green-intense-fg ansi-bold">     52</span>     ffmpeg <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
-
-<span class="ansi-red-fg">ValueError</span>: Given directory does not exist: my_slides_dir.</pre>
+10611.802--10642.819
+</pre>
 </div>
 </div>
 
@@ -778,7 +603,7 @@ See the <a href="/myslideslive/slideslive.html#compose_ffmpeg_video"><code>compo
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="compose_ffmpeg_video" class="doc_header"><code>compose_ffmpeg_video</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L439" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>compose_ffmpeg_video</code>(<strong><code>ffmpeg_script</code></strong>, <strong><code>video_file</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="compose_ffmpeg_video" class="doc_header"><code>compose_ffmpeg_video</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L440" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>compose_ffmpeg_video</code>(<strong><code>ffmpeg_script</code></strong>, <strong><code>video_file</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Builds video slides from an ffmpeg script using the
 <code>ffmpeg -f concat -i ffmpeg_concat.txt slides.mp4</code> command.</p>
@@ -827,16 +652,6 @@ execute this command from your terminal.</p>
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>file &#39;/Users/kacper/Desktop/spare/mySlidesLive/src/my_slides_dir/00793.jpg&#39;
-duration 29.023
-file &#39;/Users/kacper/Desktop/spare/mySlidesLive/src/my_slides_dir/00794.jpg&#39;
-duration 1.994</pre>
-</div>
-</div>
-
-<div class="output_area">
-
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>ffmpeg version 4.3.1 Copyright (c) 2000-2020 the FFmpeg developers
   built with Apple clang version 12.0.0 (clang-1200.0.32.28)
@@ -850,16 +665,16 @@ duration 1.994</pre>
   libswscale      5.  7.100 /  5.  7.100
   libswresample   3.  7.100 /  3.  7.100
   libpostproc    55.  7.100 / 55.  7.100
-Input #0, concat, from &#39;/var/folders/d0/9mvcgn8503s6975cz1p09rmc0000gn/T/tmp1r6uyys9&#39;:
+Input #0, concat, from &#39;/var/folders/d0/9mvcgn8503s6975cz1p09rmc0000gn/T/tmpc67k3cb9&#39;:
   Duration: 00:00:31.02, start: 0.000000, bitrate: 0 kb/s
     Stream #0:0: Video: mjpeg (Baseline), yuvj420p(pc, bt470bg/unknown/unknown), 1024x576 [SAR 96:96 DAR 16:9], 25 tbr, 25 tbn, 25 tbc
 Stream mapping:
   Stream #0:0 -&gt; #0:0 (mjpeg (native) -&gt; h264 (libx264))
 Press [q] to stop, [?] for help
-[libx264 @ 0x7fcc9e821200] using SAR=1/1
-[libx264 @ 0x7fcc9e821200] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-[libx264 @ 0x7fcc9e821200] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x7fcc9e821200] 264 - core 161 r3027 4121277 - H.264/MPEG-4 AVC codec - Copyleft 2003-2020 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+[libx264 @ 0x7fcee280cc00] using SAR=1/1
+[libx264 @ 0x7fcee280cc00] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x7fcee280cc00] profile High, level 3.1, 4:2:0, 8-bit
+[libx264 @ 0x7fcee280cc00] 264 - core 161 r3027 4121277 - H.264/MPEG-4 AVC codec - Copyleft 2003-2020 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
 Output #0, mp4, to &#39;slides.mp4&#39;:
   Metadata:
     encoder         : Lavf58.45.100
@@ -883,26 +698,26 @@ Output #0, mp4, to &#39;slides.mp4&#39;:
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>frame=  727 fps=316 q=-1.0 Lsize=     211kB time=00:00:28.96 bitrate=  59.6kbits/s dup=725 drop=0 speed=12.6x    
+<pre>frame=  727 fps=313 q=-1.0 Lsize=     211kB time=00:00:28.96 bitrate=  59.6kbits/s dup=725 drop=0 speed=12.5x    
 video:201kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 4.641892%
-[libx264 @ 0x7fcc9e821200] frame I:3     Avg QP:15.12  size: 55639
-[libx264 @ 0x7fcc9e821200] frame P:183   Avg QP:22.94  size:    56
-[libx264 @ 0x7fcc9e821200] frame B:541   Avg QP:34.24  size:    53
-[libx264 @ 0x7fcc9e821200] consecutive B-frames:  0.7%  0.3%  0.0% 99.0%
-[libx264 @ 0x7fcc9e821200] mb I  I16..4: 30.9% 59.2%  9.9%
-[libx264 @ 0x7fcc9e821200] mb P  I16..4:  0.2%  0.1%  0.0%  P16..4:  0.1%  0.0%  0.0%  0.0%  0.0%    skip:99.5%
-[libx264 @ 0x7fcc9e821200] mb B  I16..4:  0.2%  0.2%  0.0%  B16..8:  0.4%  0.0%  0.0%  direct: 0.0%  skip:99.2%  L0:58.7% L1:41.3% BI: 0.0%
-[libx264 @ 0x7fcc9e821200] 8x8 transform intra:53.6% inter:75.3%
-[libx264 @ 0x7fcc9e821200] coded y,uvDC,uvAC intra: 15.5% 12.0% 10.4% inter: 0.0% 0.0% 0.0%
-[libx264 @ 0x7fcc9e821200] i16 v,h,dc,p: 29% 71%  0%  0%
-[libx264 @ 0x7fcc9e821200] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 28% 21% 44%  1%  1%  1%  1%  1%  2%
-[libx264 @ 0x7fcc9e821200] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 23% 36% 14%  3%  4%  4%  5%  4%  6%
-[libx264 @ 0x7fcc9e821200] i8c dc,h,v,p: 85%  9%  5%  1%
-[libx264 @ 0x7fcc9e821200] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x7fcc9e821200] ref P L0: 90.8%  3.6%  3.9%  1.6%
-[libx264 @ 0x7fcc9e821200] ref B L0: 59.8% 39.8%  0.4%
-[libx264 @ 0x7fcc9e821200] ref B L1: 97.8%  2.2%
-[libx264 @ 0x7fcc9e821200] kb/s:56.54
+[libx264 @ 0x7fcee280cc00] frame I:3     Avg QP:15.12  size: 55639
+[libx264 @ 0x7fcee280cc00] frame P:183   Avg QP:22.94  size:    56
+[libx264 @ 0x7fcee280cc00] frame B:541   Avg QP:34.24  size:    53
+[libx264 @ 0x7fcee280cc00] consecutive B-frames:  0.7%  0.3%  0.0% 99.0%
+[libx264 @ 0x7fcee280cc00] mb I  I16..4: 30.9% 59.2%  9.9%
+[libx264 @ 0x7fcee280cc00] mb P  I16..4:  0.2%  0.1%  0.0%  P16..4:  0.1%  0.0%  0.0%  0.0%  0.0%    skip:99.5%
+[libx264 @ 0x7fcee280cc00] mb B  I16..4:  0.2%  0.2%  0.0%  B16..8:  0.4%  0.0%  0.0%  direct: 0.0%  skip:99.2%  L0:58.7% L1:41.3% BI: 0.0%
+[libx264 @ 0x7fcee280cc00] 8x8 transform intra:53.6% inter:75.3%
+[libx264 @ 0x7fcee280cc00] coded y,uvDC,uvAC intra: 15.5% 12.0% 10.4% inter: 0.0% 0.0% 0.0%
+[libx264 @ 0x7fcee280cc00] i16 v,h,dc,p: 29% 71%  0%  0%
+[libx264 @ 0x7fcee280cc00] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 28% 21% 44%  1%  1%  1%  1%  1%  2%
+[libx264 @ 0x7fcee280cc00] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 23% 36% 14%  3%  4%  4%  5%  4%  6%
+[libx264 @ 0x7fcee280cc00] i8c dc,h,v,p: 85%  9%  5%  1%
+[libx264 @ 0x7fcee280cc00] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0x7fcee280cc00] ref P L0: 90.8%  3.6%  3.9%  1.6%
+[libx264 @ 0x7fcee280cc00] ref B L0: 59.8% 39.8%  0.4%
+[libx264 @ 0x7fcee280cc00] ref B L1: 97.8%  2.2%
+[libx264 @ 0x7fcee280cc00] kb/s:56.54
 </pre>
 </div>
 </div>
@@ -933,7 +748,7 @@ video:201kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing o
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-rw-r--r--  1 kacper  staff  215781  8 Jul 14:51 slides.mp4
+<pre>-rw-r--r--  1 kacper  staff  215781  8 Jul 20:50 slides.mp4
 </pre>
 </div>
 </div>
@@ -955,7 +770,7 @@ video:201kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing o
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SlidesLive" class="doc_header"><code>class</code> <code>SlidesLive</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L459" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SlidesLive</code>(<strong><code>video_url</code></strong>, <strong><code>slides_folder</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="SlidesLive" class="doc_header"><code>class</code> <code>SlidesLive</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L460" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SlidesLive</code>(<strong><code>video_url</code></strong>, <strong><code>slides_folder</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Simplifies SlidesLive interaction.</p>
 <p>Should be initialised with SlidesLive presentation URL (<code>video_url</code>).
@@ -991,7 +806,7 @@ Optionally, a destination folder for downloading slides may be specified
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="SlidesLive.get_slide_urls" class="doc_header"><code>SlidesLive.get_slide_urls</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L490" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.get_slide_urls</code>(<strong><code>slide_type</code></strong>=<em><code>'big'</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="SlidesLive.get_slide_urls" class="doc_header"><code>SlidesLive.get_slide_urls</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L491" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.get_slide_urls</code>(<strong><code>slide_type</code></strong>=<em><code>'big'</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Returns a list of slide URLs -- see <a href="/myslideslive/slideslive.html#get_urls"><code>get_urls</code></a> for more details.</p>
 
@@ -1016,7 +831,7 @@ Optionally, a destination folder for downloading slides may be specified
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="SlidesLive.download_slides" class="doc_header"><code>SlidesLive.download_slides</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L514" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.download_slides</code>(<strong><code>slide_type</code></strong>=<em><code>'big'</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>, <strong><code>sleep_time</code></strong>=<em><code>0.2</code></em>, <strong><code>jobs</code></strong>=<em><code>16</code></em>, <strong><code>directory</code></strong>=<em><code>None</code></em>, <strong><code>technique</code></strong>=<em><code>'python'</code></em>)</p>
+<h4 id="SlidesLive.download_slides" class="doc_header"><code>SlidesLive.download_slides</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L515" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.download_slides</code>(<strong><code>slide_type</code></strong>=<em><code>'big'</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>, <strong><code>sleep_time</code></strong>=<em><code>0.2</code></em>, <strong><code>jobs</code></strong>=<em><code>16</code></em>, <strong><code>directory</code></strong>=<em><code>None</code></em>, <strong><code>technique</code></strong>=<em><code>'python'</code></em>)</p>
 </blockquote>
 <p>Downloads a collection of slides -- see <a href="/myslideslive/slideslive.html#get_urls"><code>get_urls</code></a> and <code>download_slide</code> for more details.</p>
 
@@ -1041,7 +856,7 @@ Optionally, a destination folder for downloading slides may be specified
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="SlidesLive.get_ffmpeg_script" class="doc_header"><code>SlidesLive.get_ffmpeg_script</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L527" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.get_ffmpeg_script</code>(<strong><code>slide_folder</code></strong>=<em><code>None</code></em>, <strong><code>last_duration</code></strong>=<em><code>None</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="SlidesLive.get_ffmpeg_script" class="doc_header"><code>SlidesLive.get_ffmpeg_script</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L528" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.get_ffmpeg_script</code>(<strong><code>slide_folder</code></strong>=<em><code>None</code></em>, <strong><code>last_duration</code></strong>=<em><code>None</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Composes ffmpeg script -- see <a href="/myslideslive/slideslive.html#ffmpeg_concat_script"><code>ffmpeg_concat_script</code></a> for more details.</p>
 
@@ -1066,7 +881,7 @@ Optionally, a destination folder for downloading slides may be specified
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="SlidesLive.compose_video" class="doc_header"><code>SlidesLive.compose_video</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L556" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.compose_video</code>(<strong><code>video_file</code></strong>=<em><code>None</code></em>, <strong><code>slide_folder</code></strong>=<em><code>None</code></em>, <strong><code>last_duration</code></strong>=<em><code>None</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="SlidesLive.compose_video" class="doc_header"><code>SlidesLive.compose_video</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L557" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.compose_video</code>(<strong><code>video_file</code></strong>=<em><code>None</code></em>, <strong><code>slide_folder</code></strong>=<em><code>None</code></em>, <strong><code>last_duration</code></strong>=<em><code>None</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Builds slides video -- see <a href="/myslideslive/slideslive.html#ffmpeg_concat_script"><code>ffmpeg_concat_script</code></a> and <a href="/myslideslive/slideslive.html#compose_ffmpeg_video"><code>compose_ffmpeg_video</code></a> for more details.</p>
 
@@ -1144,19 +959,7 @@ Optionally, a destination folder for downloading slides may be specified
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>01074.jpg  01087.jpg  01100.jpg  01113.jpg  01126.jpg  01139.jpg  01152.jpg
-01075.jpg  01088.jpg  01101.jpg  01114.jpg  01127.jpg  01140.jpg  01153.jpg
-01076.jpg  01089.jpg  01102.jpg  01115.jpg  01128.jpg  01141.jpg  01154.jpg
-01077.jpg  01090.jpg  01103.jpg  01116.jpg  01129.jpg  01142.jpg  01155.jpg
-01078.jpg  01091.jpg  01104.jpg  01117.jpg  01130.jpg  01143.jpg  01156.jpg
-01079.jpg  01092.jpg  01105.jpg  01118.jpg  01131.jpg  01144.jpg  01157.jpg
-01080.jpg  01093.jpg  01106.jpg  01119.jpg  01132.jpg  01145.jpg  01158.jpg
-01081.jpg  01094.jpg  01107.jpg  01120.jpg  01133.jpg  01146.jpg  01159.jpg
-01082.jpg  01095.jpg  01108.jpg  01121.jpg  01134.jpg  01147.jpg  01160.jpg
-01083.jpg  01096.jpg  01109.jpg  01122.jpg  01135.jpg  01148.jpg  01161.jpg
-01084.jpg  01097.jpg  01110.jpg  01123.jpg  01136.jpg  01149.jpg  01162.jpg
-01085.jpg  01098.jpg  01111.jpg  01124.jpg  01137.jpg  01150.jpg  01163.jpg
-01086.jpg  01099.jpg  01112.jpg  01125.jpg  01138.jpg  01151.jpg
+<pre>01074.jpg  01075.jpg
 </pre>
 </div>
 </div>
@@ -1199,17 +1002,17 @@ Optionally, a destination folder for downloading slides may be specified
   libswscale      5.  7.100 /  5.  7.100
   libswresample   3.  7.100 /  3.  7.100
   libpostproc    55.  7.100 / 55.  7.100
-Input #0, concat, from &#39;/var/folders/d0/9mvcgn8503s6975cz1p09rmc0000gn/T/tmpaty61unf&#39;:
-  Duration: 00:12:52.03, start: 0.000000, bitrate: 0 kb/s
+Input #0, concat, from &#39;/var/folders/d0/9mvcgn8503s6975cz1p09rmc0000gn/T/tmpmqal52pe&#39;:
+  Duration: 00:00:35.00, start: 0.000000, bitrate: 0 kb/s
     Stream #0:0: Video: mjpeg (Baseline), yuvj420p(pc, bt470bg/unknown/unknown), 1024x576 [SAR 96:96 DAR 16:9], 25 tbr, 25 tbn, 25 tbc
 Stream mapping:
   Stream #0:0 -&gt; #0:0 (mjpeg (native) -&gt; h264 (libx264))
 Press [q] to stop, [?] for help
-[libx264 @ 0x7fc36400b000] using SAR=1/1
-[libx264 @ 0x7fc36400b000] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-[libx264 @ 0x7fc36400b000] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x7fc36400b000] 264 - core 161 r3027 4121277 - H.264/MPEG-4 AVC codec - Copyleft 2003-2020 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to &#39;38956531.mp4&#39;:
+[libx264 @ 0x7fdbd2835e00] using SAR=1/1
+[libx264 @ 0x7fdbd2835e00] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x7fdbd2835e00] profile High, level 3.1, 4:2:0, 8-bit
+[libx264 @ 0x7fdbd2835e00] 264 - core 161 r3027 4121277 - H.264/MPEG-4 AVC codec - Copyleft 2003-2020 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to &#39;beyond-static-papers.mp4&#39;:
   Metadata:
     encoder         : Lavf58.45.100
     Stream #0:0: Video: h264 (libx264) (avc1 / 0x31637661), yuvj420p(pc), 1024x576 [SAR 96:96 DAR 16:9], q=-1--1, 25 fps, 12800 tbn, 25 tbc
@@ -1217,9 +1020,7 @@ Output #0, mp4, to &#39;38956531.mp4&#39;:
       encoder         : Lavc58.91.100 libx264
     Side data:
       cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-More than 1000 frames duplicated       0kB time=00:00:34.92 bitrate=   0.0kbits/s dup=922 drop=0 speed= 9.7x    
-More than 10000 frames duplicated   2048kB time=00:06:37.92 bitrate=  42.2kbits/s dup=9940 drop=0 speed=13.5x    
-frame=15976 fps=294 q=28.0 size=    3328kB time=00:10:36.92 bitrate=  42.8kbits/s dup=15886 drop=0 speed=11.7x    </pre>
+</pre>
 </div>
 </div>
 
@@ -1227,6 +1028,10 @@ frame=15976 fps=294 q=28.0 size=    3328kB time=00:10:36.92 bitrate=  42.8kbits/
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
+
+
+Extracted time segment in seconds:
+    15215.247--15250.244
 </pre>
 </div>
 </div>
@@ -1234,26 +1039,25 @@ frame=15976 fps=294 q=28.0 size=    3328kB time=00:10:36.92 bitrate=  42.8kbits/
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>frame=16048 fps=293 q=-1.0 Lsize=    3613kB time=00:10:41.80 bitrate=  46.1kbits/s dup=15958 drop=0 speed=11.7x    
-video:3425kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 5.511677%
-[libx264 @ 0x7fc36400b000] frame I:77    Avg QP:10.25  size: 32604
-[libx264 @ 0x7fc36400b000] frame P:4040  Avg QP:10.54  size:   141
-[libx264 @ 0x7fc36400b000] frame B:11931 Avg QP:12.68  size:    36
-[libx264 @ 0x7fc36400b000] consecutive B-frames:  0.8%  0.1%  0.1% 99.0%
-[libx264 @ 0x7fc36400b000] mb I  I16..4: 67.7% 23.5%  8.8%
-[libx264 @ 0x7fc36400b000] mb P  I16..4:  0.1%  0.1%  0.0%  P16..4:  0.2%  0.0%  0.0%  0.0%  0.0%    skip:99.6%
-[libx264 @ 0x7fc36400b000] mb B  I16..4:  0.0%  0.0%  0.0%  B16..8:  0.3%  0.0%  0.0%  direct: 0.0%  skip:99.7%  L0:65.1% L1:34.9% BI: 0.0%
-[libx264 @ 0x7fc36400b000] 8x8 transform intra:24.7% inter:96.6%
-[libx264 @ 0x7fc36400b000] coded y,uvDC,uvAC intra: 16.0% 17.8% 9.8% inter: 0.0% 0.0% 0.0%
-[libx264 @ 0x7fc36400b000] i16 v,h,dc,p: 80% 16%  4%  0%
-[libx264 @ 0x7fc36400b000] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 41% 23% 25%  1%  2%  1%  2%  1%  3%
-[libx264 @ 0x7fc36400b000] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 31% 28% 14%  3%  5%  5%  5%  4%  6%
-[libx264 @ 0x7fc36400b000] i8c dc,h,v,p: 68% 20% 11%  1%
-[libx264 @ 0x7fc36400b000] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x7fc36400b000] ref P L0: 90.7%  4.1%  4.5%  0.7%
-[libx264 @ 0x7fc36400b000] ref B L0: 46.8% 53.1%  0.1%
-[libx264 @ 0x7fc36400b000] ref B L1: 99.5%  0.5%
-[libx264 @ 0x7fc36400b000] kb/s:43.70
+<pre>frame=  651 fps=182 q=-1.0 Lsize=     114kB time=00:00:25.92 bitrate=  36.1kbits/s dup=649 drop=0 speed=7.26x    
+video:106kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 7.984356%
+[libx264 @ 0x7fdbd2835e00] frame I:4     Avg QP:13.21  size: 20812
+[libx264 @ 0x7fdbd2835e00] frame P:164   Avg QP:13.22  size:    58
+[libx264 @ 0x7fdbd2835e00] frame B:483   Avg QP:12.67  size:    31
+[libx264 @ 0x7fdbd2835e00] consecutive B-frames:  1.1%  0.0%  0.0% 98.9%
+[libx264 @ 0x7fdbd2835e00] mb I  I16..4: 37.0% 54.1%  8.8%
+[libx264 @ 0x7fdbd2835e00] mb P  I16..4:  0.0%  0.0%  0.0%  P16..4:  0.3%  0.0%  0.0%  0.0%  0.0%    skip:99.7%
+[libx264 @ 0x7fdbd2835e00] mb B  I16..4:  0.0%  0.0%  0.0%  B16..8:  0.1%  0.0%  0.0%  direct: 0.0%  skip:99.9%  L0:53.1% L1:46.9% BI: 0.0%
+[libx264 @ 0x7fdbd2835e00] 8x8 transform intra:53.9% inter:98.5%
+[libx264 @ 0x7fdbd2835e00] coded y,uvDC,uvAC intra: 19.7% 27.3% 15.5% inter: 0.0% 0.1% 0.0%
+[libx264 @ 0x7fdbd2835e00] i16 v,h,dc,p: 78% 15%  7%  1%
+[libx264 @ 0x7fdbd2835e00] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 60% 16% 16%  2%  1%  1%  1%  1%  1%
+[libx264 @ 0x7fdbd2835e00] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 39% 29% 10%  4%  4%  4%  4%  3%  4%
+[libx264 @ 0x7fdbd2835e00] i8c dc,h,v,p: 64% 17% 15%  3%
+[libx264 @ 0x7fdbd2835e00] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0x7fdbd2835e00] ref P L0: 97.5%  0.0%  1.9%  0.5%
+[libx264 @ 0x7fdbd2835e00] ref B L0: 46.6% 53.4%
+[libx264 @ 0x7fdbd2835e00] kb/s:33.09
 </pre>
 </div>
 </div>
@@ -1284,7 +1088,7 @@ video:3425kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing 
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-rw-r--r--  1 kacper  staff  3700170  8 Jul 15:42 38956531.mp4
+<pre>-rw-r--r--  1 kacper  staff  117068  8 Jul 20:51 beyond-static-papers.mp4
 </pre>
 </div>
 </div>

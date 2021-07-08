@@ -1,13 +1,13 @@
 ---
 
-title: mySlidesLive helps you to get your slides
+title: mySlidesLive
 
 
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Summary description here."
-description: "Summary description here."
+summary: "...helps you to extract your SlidesLive presentation."
+description: "...helps you to extract your SlidesLive presentation."
 nb_path: "src/index.ipynb"
 ---
 <!--
@@ -70,59 +70,12 @@ nb_path: "src/index.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">myslideslive</span> <span class="kn">import</span> <span class="n">SlidesLive</span>
-</pre></div>
 
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">msl</span> <span class="o">=</span> <span class="n">SlidesLive</span><span class="p">(</span><span class="s1">&#39;https://slideslive.com/38956531/&#39;</span>
+<span class="n">msl</span> <span class="o">=</span> <span class="n">SlidesLive</span><span class="p">(</span><span class="s1">&#39;https://slideslive.com/38956531/&#39;</span>
                  <span class="s1">&#39;beyond-static-papers-&#39;</span>
                  <span class="s1">&#39;rethinking-how-we-share-scientific-understanding-in-ml&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">msl</span><span class="o">.</span><span class="n">download_slides</span><span class="p">(</span><span class="n">slide</span><span class="o">=</span><span class="p">(</span><span class="mi">1074</span><span class="p">,</span> <span class="mi">1075</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">msl</span><span class="o">.</span><span class="n">compose_video</span><span class="p">()</span>
+<span class="n">msl</span><span class="o">.</span><span class="n">download_slides</span><span class="p">(</span><span class="n">slide</span><span class="o">=</span><span class="p">(</span><span class="mi">1074</span><span class="p">,</span> <span class="mi">1075</span><span class="p">))</span>
+<span class="n">msl</span><span class="o">.</span><span class="n">compose_video</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -168,9 +121,9 @@ https://slideslive.com/38956531/beyond-static-papers-rethinking-how-we-share-sci
 Then you can cut the video with:</p>
 <div class="highlight"><pre><span></span>ffmpeg -ss <span class="o">[</span>start<span class="o">]</span> -i video_in.mp4 -t <span class="o">[</span>duration<span class="o">]</span> -c copy video_out.mp4
 </pre></div>
-<p>where <code>[start]</code> specifies the start time, e.g. 00:01:23.000 or 83 (in seconds);
+<p>where <code>[start]</code> specifies the start time, e.g. <code>00:01:23.000</code> or <code>83</code> (in seconds);
 and <code>[duration]</code> specifies the duration in the same format.
-Alternatively to <code>-t [duration]</code>, you may use <code>-to</code>.</p>
+Alternatively to <code>-t [duration]</code>, you may use <code>-to [end]</code>.</p>
 
 </div>
 </div>

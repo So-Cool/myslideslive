@@ -15,9 +15,6 @@ entries:
     - output: web,pdf
       title: Interact with SlidesLive
       url: slideslive.html
-    - output: web,pdf
-      title: Title
-      url: test_helper.html
     output: web
     title: myslideslive
   output: web
