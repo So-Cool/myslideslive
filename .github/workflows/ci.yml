@@ -1,0 +1,36 @@
+name: CI ☯️
+on: [push, pull_request]
+jobs:
+  build-n-test:
+    name: Runs Continuous Integration ☯️ scripts
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout code 🛎️
+      uses: actions/checkout@v2.3.1
+    - name: Set up Python 3.6 🐍
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6
+        architecture: x64
+    - name: Install build dependencies 💾
+      run: pip install nbdev jupyter
+    - name: Build 🏗️ and install 💽 the library
+      run: |
+        nbdev_build_lib
+        pip install -e .
+    - name: Check readability of all notebooks 📖
+      run: nbdev_read_nbs
+    - name: Check cleanliness of all notebooks 🛁
+      run: |
+        echo "Check we are starting with clean git checkout"
+        if [ -n "$(git status -uno -s)" ]; then echo "git status is not clean"; false; fi
+        echo "Trying to strip out notebooks"
+        nbdev_clean_nbs
+        echo "Check that strip out was unnecessary"
+        git status -s # display the status to see which nbs need cleaning up
+        if [ -n "$(git status -uno -s)" ]; then echo -e "!!! Detected unstripped out notebooks\n!!!Remember to run nbdev_install_git_hooks"; false; fi
+    - name: Check for library--notebooks divergence ⚔️
+      run: |
+        if [ -n "$(nbdev_diff_nbs)" ]; then echo -e "!!! Detected difference between the notebooks and the library"; false; fi
+    - name: Run tests 🧪
+      run: nbdev_test_nbs
