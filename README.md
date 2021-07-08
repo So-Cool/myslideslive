@@ -1,5 +1,5 @@
-# mySlidesLive helps you to get your slides
-> Summary description here.
+# mySlidesLive
+> ...helps you to extract your SlidesLive presentation.
 
 
 ## Install
@@ -16,19 +16,11 @@ In a Python console:
 
 ```python
 from myslideslive import SlidesLive
-```
 
-```python
 msl = SlidesLive('https://slideslive.com/38956531/'
                  'beyond-static-papers-'
                  'rethinking-how-we-share-scientific-understanding-in-ml')
-```
-
-```python
-msl.download_slides(slide=(1074, 1163))
-```
-
-```python
+msl.download_slides(slide=(1074, 1075))
 msl.compose_video()
 ```
 
@@ -36,7 +28,7 @@ msl.compose_video()
 
 Directly from terminal:
 ```bash
-msl --slide 1074 1163 \
+msl --slide 1074 1075 \
 https://slideslive.com/38956531/beyond-static-papers-rethinking-how-we-share-scientific-understanding-in-ml
 ```
 
@@ -56,9 +48,9 @@ Then you can cut the video with:
 ```bash
 ffmpeg -ss [start] -i video_in.mp4 -t [duration] -c copy video_out.mp4
 ```
-where `[start]` specifies the start time, e.g. 00:01:23.000 or 83 (in seconds);
+where `[start]` specifies the start time, e.g. `00:01:23.000` or `83` (in seconds);
 and `[duration]` specifies the duration in the same format.
-Alternatively to `-t [duration]`, you may use `-to`.
+Alternatively to `-t [duration]`, you may use `-to [end]`.
 
 [youtube-dl]: https://github.com/ytdl-org/youtube-dl
 

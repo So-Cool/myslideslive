@@ -22,15 +22,16 @@ jobs:
       run: |
         nbdev_build_lib
         pip install -e .
+        python -c 'from nbdev.export2html import make_readme; make_readme()'
     - name: Check cleanliness of all notebooks 🛁
       run: |
         echo "Check we are starting with clean git checkout"
-        if [ -n "$(git status -uno -s | grep -v 'myslideslive/__init__.py')" ]; then echo "git status is not clean"; false; fi
+        if [ -n "$(git status -uno -s)" ]; then echo "git status is not clean"; false; fi
         echo "Trying to strip out notebooks"
         nbdev_clean_nbs
         echo "Check that strip out was unnecessary"
         git status -s # display the status to see which nbs need cleaning up
-        if [ -n "$(git status -uno -s | grep -v 'myslideslive/__init__.py')" ]; then echo -e "!!! Detected unstripped out notebooks\n!!!Remember to run nbdev_install_git_hooks"; false; fi
+        if [ -n "$(git status -uno -s)" ]; then echo -e "!!! Detected unstripped out notebooks\n!!!Remember to run nbdev_install_git_hooks"; false; fi
     - name: Check for library--notebooks divergence ⚔️
       run: |
         if [ -n "$(nbdev_diff_nbs)" ]; then echo -e "!!! Detected difference between the notebooks and the library"; false; fi
@@ -84,7 +85,10 @@ jobs:
         nbdev_build_lib
         pip install .
     - name: Build 🔧 the docs 📖
-      run: nbdev_build_docs
+      run: |
+        nbdev_build_docs
+        cp LICENSE docs/
+        cp README.md docs/
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
