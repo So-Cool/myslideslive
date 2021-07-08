@@ -2,6 +2,20 @@
 > ...helps you to extract your SlidesLive presentation.
 
 
+[![Licence][licence-badge]][licence-link]
+[![Python][python-badge]][python-link]
+[![PyPI][pypi-badge]][pypi-link]
+[![Documentation][doc-badge]][doc-link]
+
+[licence-badge]: https://img.shields.io/github/license/so-cool/myslideslive.svg
+[licence-link]: https://github.com/so-cool/myslideslive/blob/master/LICENSE
+[python-badge]: https://img.shields.io/badge/python-3.6-blue.svg
+[python-link]: https://github.com/so-cool/myslideslive
+[pypi-badge]: https://img.shields.io/pypi/v/myslideslive.svg
+[pypi-link]: https://pypi.org/project/myslideslive
+[doc-badge]: https://img.shields.io/badge/read-documentation-blue.svg
+[doc-link]: https://so-cool.github.io/myslideslive
+
 ## Install
 
 ```bash
