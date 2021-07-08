@@ -28,7 +28,7 @@ jobs:
         echo "Check we are starting with clean git checkout"
         if [ -n "$(git status -uno -s)" ]; then echo "git status is not clean"; false; fi
         echo "Trying to strip out notebooks"
-        nbdev_clean_nbs
+        nbdev_clean_nbs --clear_all True
         echo "Check that strip out was unnecessary"
         git status -s # display the status to see which nbs need cleaning up
         if [ -n "$(git status -uno -s)" ]; then echo -e "!!! Detected unstripped out notebooks\n!!!Remember to run nbdev_install_git_hooks"; false; fi
@@ -51,13 +51,9 @@ jobs:
         python-version: 3.6
         architecture: x64
     - name: Install build dependencies 💾
-      run: |
-        pip install nbdev jupyter
-        pip install wheel
+      run: pip install wheel
     - name: Build a binary wheel and a source tarball distributions 📦
-      run: |
-        nbdev_build_lib
-        python setup.py bdist_wheel sdist
+      run: python setup.py bdist_wheel sdist
     - name: Publish distribution 📦 to PyPI
       if: startsWith(github.ref, 'refs/tags')
       uses: pypa/gh-action-pypi-publish@master
@@ -82,7 +78,6 @@ jobs:
     - name: Install dependencies 💾
       run: |
         pip install nbdev jupyter
-        nbdev_build_lib
         pip install .
     - name: Build 🔧 the docs 📖
       run: |
