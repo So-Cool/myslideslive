@@ -13,22 +13,24 @@ jobs:
         python-version: 3.6
         architecture: x64
     - name: Install build dependencies 💾
-      run: pip install nbdev jupyter
+      run: |
+        sudo apt-get install ffmpeg
+        pip install nbdev jupyter
+    - name: Check readability of all notebooks 📖
+      run: nbdev_read_nbs
     - name: Build 🏗️ and install 💽 the library
       run: |
         nbdev_build_lib
         pip install -e .
-    - name: Check readability of all notebooks 📖
-      run: nbdev_read_nbs
     - name: Check cleanliness of all notebooks 🛁
       run: |
         echo "Check we are starting with clean git checkout"
-        if [ -n "$(git status -uno -s)" ]; then echo "git status is not clean"; false; fi
+        if [ -n "$(git status -uno -s | grep -v 'myslideslive/__init__.py')" ]; then echo "git status is not clean"; false; fi
         echo "Trying to strip out notebooks"
         nbdev_clean_nbs
         echo "Check that strip out was unnecessary"
         git status -s # display the status to see which nbs need cleaning up
-        if [ -n "$(git status -uno -s)" ]; then echo -e "!!! Detected unstripped out notebooks\n!!!Remember to run nbdev_install_git_hooks"; false; fi
+        if [ -n "$(git status -uno -s | grep -v 'myslideslive/__init__.py')" ]; then echo -e "!!! Detected unstripped out notebooks\n!!!Remember to run nbdev_install_git_hooks"; false; fi
     - name: Check for library--notebooks divergence ⚔️
       run: |
         if [ -n "$(nbdev_diff_nbs)" ]; then echo -e "!!! Detected difference between the notebooks and the library"; false; fi
