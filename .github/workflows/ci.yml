@@ -86,6 +86,7 @@ jobs:
     - name: Build 🔧 the docs 📖
       run: |
         pip install nbdev  # NOTE: notebook execution issue
+        nbdev_build_lib  # needed to generate _config.yml
         nbdev_build_docs
         cp LICENSE docs/
         cp README.md docs/
