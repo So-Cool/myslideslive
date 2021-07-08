@@ -14,7 +14,7 @@ pip install myslideslive
 
 In a Python console:
 
-```
+```python
 from myslideslive import SlidesLive
 
 msl = SlidesLive('https://slideslive.com/38956531/'
@@ -23,6 +23,13 @@ msl = SlidesLive('https://slideslive.com/38956531/'
 msl.download_slides(slide=(1074, 1075))
 msl.compose_video()
 ```
+
+    
+    
+    
+    Extracted time segment in seconds:
+        15215.247--15250.244
+
 
 ### CLI
 

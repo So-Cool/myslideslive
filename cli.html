@@ -40,6 +40,43 @@ nb_path: "src/cli.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>usage: mls [-h] [--size SIZE] [--waittime WAITTIME]
+                             [--lastduration LASTDURATION]
+                             [--time MIN_TIME MAX_TIME]
+                             [--slide MIN_SLIDE_ID MAX_SLIDE_ID]
+                             url
+
+Take care of your SlidesLive slides...
+
+positional arguments:
+  url                   SlidesLive URL
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --size SIZE           Slide size: medium or big
+  --waittime WAITTIME   Seconds to wait after downloading each slide
+  --lastduration LASTDURATION
+                        The duration of last slide in seconds
+  --time MIN_TIME MAX_TIME
+                        A time range used to extract slides (use None for one
+                        of the values to get min or max range)
+  --slide MIN_SLIDE_ID MAX_SLIDE_ID
+                        A range of slide IDs to extract (use None for one of
+                        the values to get min or max range)
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
