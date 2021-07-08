@@ -19,8 +19,7 @@ index = {"parser": "cli.ipynb",
          "SlidesLive": "slideslive.ipynb"}
 
 modules = ["cli.py",
-           "slideslive.py",
-           "test_helper.py"]
+           "slideslive.py"]
 
 doc_url = "https://So-Cool.github.io/myslideslive/"
 

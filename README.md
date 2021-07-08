@@ -14,7 +14,7 @@ pip install myslideslive
 
 In a Python console:
 
-```python
+```
 from myslideslive import SlidesLive
 
 msl = SlidesLive('https://slideslive.com/38956531/'
