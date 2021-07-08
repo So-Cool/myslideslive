@@ -64,7 +64,6 @@ jobs:
     name: Build 🔧 the docs 📖 and publish 🚀 them to GitHub Pages
     runs-on: ubuntu-18.04
     needs: [build-n-test]
-    if: github.ref == 'refs/heads/master'
     steps:
     - name: Checkout code 🛎️
       uses: actions/checkout@v2.3.1
@@ -77,6 +76,7 @@ jobs:
         architecture: x64
     - name: Install dependencies 💾
       run: |
+        sudo apt-get install ffmpeg
         pip install nbdev jupyter
         pip install .
     - name: Execute the notebooks 📖
@@ -91,6 +91,7 @@ jobs:
         cp README.md docs/
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@3.7.1
+      if: github.ref == 'refs/heads/master'
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
