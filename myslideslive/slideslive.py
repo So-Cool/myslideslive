@@ -434,13 +434,18 @@ def ffmpeg_concat_script(slide_meta, slide_folder=None, last_duration=None,
 
             glob_end = (slide_meta['slides'][i + 1]['time'] / 1000) + last_duration
 
+    # NOTE: the last image must be duplicated without duration due to a bug
+    #       in ffmpeg (https://trac.ffmpeg.org/wiki/Slideshow)
+    if len(ffmpeg) > 1:
+        ffmpeg.append(ffmpeg[-2])
+
     return '\n'.join(ffmpeg), glob_start, glob_end
 
 # Cell
 def compose_ffmpeg_video(ffmpeg_script, video_file=None):
     """
     Builds video slides from an ffmpeg script using the
-    `ffmpeg -f concat -i ffmpeg_concat.txt slides.mp4` command.
+    `ffmpeg -safe 0 -f concat -i ffmpeg_concat.txt -vsync vfr slides.mp4` command.
     """
     if video_file is None:
         video_file = 'slides.mp4'
@@ -453,7 +458,8 @@ def compose_ffmpeg_video(ffmpeg_script, video_file=None):
         tf.write(ffmpeg_script)
         tf.seek(0)
 
-        stream = os.popen(f'ffmpeg -f concat -safe 0 -i {tf.name} {video_file}')
+        # -pix_fmt yuv420p
+        stream = os.popen(f'ffmpeg -safe 0 -f concat -i {tf.name} -vsync vfr {video_file}')
         print(stream.read())
 
 # Cell
@@ -517,7 +523,7 @@ class SlidesLive():
         """Downloads a collection of slides -- see `get_urls` and `download_slide` for more details."""
         if directory is not None:
             self.slides_dir = directory
-        elif directory is None and self.slides_dir is None:
+        elif self.slides_dir is None:
             self.slides_dir = self.video_id
 
         url_list = self.get_slide_urls(slide_type=slide_type,
@@ -530,7 +536,7 @@ class SlidesLive():
         """Composes ffmpeg script -- see `ffmpeg_concat_script` for more details."""
         if slide_folder is not None:
             self.slides_dir = slide_folder
-        elif directory is None and self.slides_dir is None:
+        elif self.slides_dir is None:
             self.slides_dir = self.video_id
 
         if self.slide is None and slide is None:
