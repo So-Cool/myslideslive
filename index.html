@@ -133,11 +133,18 @@ https://slideslive.com/38956531/beyond-static-papers-rethinking-how-we-share-sci
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Development">Development<a class="anchor-link" href="#Development"> </a></h2><ul>
 <li>To develop this package you need <a href="https://nbdev.fast.ai/">nbdev</a>.</li>
-<li>The library is built with <code>nbdev_build_lib</code> and <code>nbdev_update_lib</code>.</li>
-<li><code>nbdev_build_lib</code> also builds the <code>Makefile</code>.</li>
+<li>The library (and <code>Makefile</code>) is built with <code>nbdev_build_lib</code>.</li>
+<li><code>nbdev_update_lib</code> updates the notebooks based on changes in the library.</li>
 <li>The <code>README.md</code> is regenerated with <code>nbdev_build_docs</code>.</li>
 <li>The git hooks are set up with <code>nbdev_install_git_hooks</code>.</li>
 </ul>
+<p>Before commiting code changes make sure to run:</p>
+<div class="highlight"><pre><span></span>nbdev_install_git_hooks <span class="o">&amp;&amp;</span> <span class="se">\</span>
+nbdev_build_lib <span class="o">&amp;&amp;</span> <span class="se">\</span>
+nbdev_build_docs <span class="o">&amp;&amp;</span> <span class="se">\</span>
+nbdev_clean_nbs --clear_all True <span class="o">&amp;&amp;</span> <span class="se">\</span>
+nbdev_test_nbs
+</pre></div>
 
 </div>
 </div>
@@ -145,13 +152,37 @@ https://slideslive.com/38956531/beyond-static-papers-rethinking-how-we-share-sci
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="What-about-the-SlidesLive-video-recording?">What about the SlidesLive video recording?<a class="anchor-link" href="#What-about-the-SlidesLive-video-recording?"> </a></h2><p>If you want to get the video recording of your SlidesLive presentation as well,
-<a href="https://github.com/ytdl-org/youtube-dl">youtube-dl</a> can take care of that.
-Then you can cut the video with:</p>
-<div class="highlight"><pre><span></span>ffmpeg -ss <span class="o">[</span>start<span class="o">]</span> -i video_in.mp4 -t <span class="o">[</span>duration<span class="o">]</span> -c copy video_out.mp4
+<a href="https://github.com/ytdl-org/youtube-dl">youtube-dl</a> can take care of that.</p>
+<h2 id="Cutting-the-video">Cutting the video<a class="anchor-link" href="#Cutting-the-video"> </a></h2><p>Then you can cut the video with:</p>
+<div class="highlight"><pre><span></span>ffmpeg -i video_in.mp4 -ss <span class="o">[</span>start<span class="o">]</span> -t <span class="o">[</span>duration<span class="o">]</span> -c copy video_out.mp4
 </pre></div>
 <p>where <code>[start]</code> specifies the start time, e.g. <code>00:01:23.000</code> or <code>83</code> (in seconds);
 and <code>[duration]</code> specifies the duration in the same format.
-Alternatively to <code>-t [duration]</code>, you may use <code>-to [end]</code>.</p>
+Alternatively to <code>-t [duration]</code>, you may use <code>-to [end]</code>, i.e.:</p>
+<div class="highlight"><pre><span></span>ffmpeg -i video_in.mp4 -ss <span class="o">[</span>start<span class="o">]</span> -to <span class="o">[</span>end<span class="o">]</span> -c copy video_out.mp4
+</pre></div>
+<p><strong>NOTE:</strong> the order of ffmpeg flags seems to influence the precision of
+the video cut.</p>
+<h2 id="Picture-in-Picture-embedding">Picture-in-Picture embedding<a class="anchor-link" href="#Picture-in-Picture-embedding"> </a></h2><p>To embed the video recording within the bottom-right part of the presentation video,
+preserving the audio stream from the former use:</p>
+<div class="highlight"><pre><span></span>ffmpeg -i embedded_video.mp4 -i main_video.mp4 <span class="se">\</span>
+  -filter_complex <span class="s2">&quot;[0] scale=iw/10:ih/10 [embed]; \</span>
+<span class="s2">                   [1] fps=25 [bg]; \</span>
+<span class="s2">                   [bg][embed] overlay=main_w-overlay_w:main_h-overlay_h&quot;</span> <span class="se">\</span>
+  -framerate <span class="m">25</span> <span class="se">\</span>
+  -b:v 4810k <span class="se">\</span>
+  -b:a 126k <span class="se">\</span>
+  -ar <span class="m">44100</span> <span class="se">\</span>
+  PiP_video.mp4
+</pre></div>
+<p>The sound stream is always taken from the first video in the input (<code>-i</code>) list;
+if you swap the input videos, you also need to swap <code>[0]</code> and <code>[1]</code> in
+the filter string (<code>-filter_complex</code>).
+To move the embedded video to a different position, you need to change
+the <code>overlay</code> parameter.
+For example, <code>overlay=main_w-overlay_w:0</code> will place the embed in
+the top-right corner; <code>overlay=0:0</code> in the top-left; and
+<code>overlay=0:main_h-overlay_h</code> in the bottom-left.</p>
 
 </div>
 </div>
@@ -169,6 +200,7 @@ Alternatively to <code>-t [duration]</code>, you may use <code>-to [end]</code>.
 <li><a href="https://github.com/Chandrahasd/slideslive-slides-dl">https://github.com/Chandrahasd/slideslive-slides-dl</a>; and</li>
 <li><a href="https://github.com/AugustKarlstedt/slideslive-downloader">https://github.com/AugustKarlstedt/slideslive-downloader</a>.</li>
 </ul>
+<p>PiP ffmpeg command comes from <a href="https://www.oodlestechnologies.com/blogs/PICTURE-IN-PICTURE-effect-using-FFMPEG/">here</a>.</p>
 
 </div>
 </div>
