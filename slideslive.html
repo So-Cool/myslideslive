@@ -40,7 +40,7 @@ nb_path: "src/slideslive.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="url2id" class="doc_header"><code>url2id</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L39" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>url2id</code>(<strong><code>sl_url</code></strong>)</p>
+<h4 id="url2id" class="doc_header"><code>url2id</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L42" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>url2id</code>(<strong><code>sl_url</code></strong>)</p>
 </blockquote>
 <p>Convers SlidesLive URL to presentation ID and name.</p>
 
@@ -117,7 +117,7 @@ nb_path: "src/slideslive.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_sl_info" class="doc_header"><code>get_sl_info</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L48" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_sl_info</code>(<strong><code>sl_id</code></strong>)</p>
+<h4 id="get_sl_info" class="doc_header"><code>get_sl_info</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_sl_info</code>(<strong><code>sl_id</code></strong>)</p>
 </blockquote>
 <p>Pulls information about a SlidesLive presentation.</p>
 
@@ -170,7 +170,6 @@ nb_path: "src/slideslive.ipynb"
 <pre>{&#39;title&#39;: &#39;Beyond Static Papers: Rethinking How We Share Scientific Understanding in ML&#39;,
  &#39;is_live&#39;: False,
  &#39;updated_at&#39;: &#39;1624456123&#39;,
- &#39;last_modified&#39;: &#39;2021-06-23T13:48:43Z&#39;,
  &#39;playing_analytics_disabled&#39;: False,
  &#39;player_start_time&#39;: 2494000,
  &#39;video_ratio&#39;: None,
@@ -178,23 +177,20 @@ nb_path: "src/slideslive.ipynb"
  &#39;default_subtitles_language&#39;: None,
  &#39;thumbnail&#39;: &#39;https://cdn.slideslive.com/data/presentations/38956531/slideslive_beyond-static-papers-rethinking-how-we-share-scientific-understanding-in-ml.jpg?1620132474&#39;,
  &#39;player_type&#39;: &#39;video_slideshow&#39;,
- &#39;has_video&#39;: True,
- &#39;has_audio&#39;: False,
- &#39;has_slides&#39;: True,
  &#39;media_set_id&#39;: 119992,
  &#39;video_version&#39;: 2,
  &#39;slides_version&#39;: 1,
  &#39;video_service_name&#39;: &#39;yoda&#39;,
  &#39;video_service_id&#39;: &#39;oHAAFl-q6gQx&#39;,
  &#39;video_ken_enabled&#39;: True,
- &#39;video_cdn_servers&#39;: [&#39;01b.cdn.yoda.slideslive.com&#39;,
-  &#39;01.cdn.yoda.slideslive.com&#39;],
+ &#39;video_cdn_servers&#39;: [&#39;01.cdn.yoda.slideslive.com&#39;,
+  &#39;01b.cdn.yoda.slideslive.com&#39;],
  &#39;slides_json_url&#39;: &#39;https://cdn.slideslive.com/data/presentations/38956531/v1/slides.json?1624456122&#39;,
  &#39;slides_xml_url&#39;: &#39;https://cdn.slideslive.com/data/presentations/38956531/v1/38956531.xml?1624456122&#39;,
  &#39;subtitles&#39;: [{&#39;name&#39;: &#39;English&#39;,
    &#39;language&#39;: &#39;en&#39;,
    &#39;subtitles_id&#39;: 56748,
-   &#39;webvtt_url&#39;: &#39;https://slideslive-video-subtitles.s3.amazonaws.com/56748/subtitles.vtt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIXRWKI3HCASN5BNQ%2F20210710%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20210710T193213Z&amp;X-Amz-Expires=86400&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=a2e65498f06685522fdc0b2701ea4b3379a4ba13d28278670954ca8c5e9df4cc&#39;}]}</pre>
+   &#39;webvtt_url&#39;: &#39;https://slideslive-video-subtitles.s3.amazonaws.com/56748/subtitles.vtt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIXRWKI3HCASN5BNQ%2F20211111%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20211111T053107Z&amp;X-Amz-Expires=86400&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=ddcf7c52d65774fbdaa0864dc981718fd872e68da02579f066397c5dea25f8b4&#39;}]}</pre>
 </div>
 
 </div>
@@ -216,7 +212,7 @@ nb_path: "src/slideslive.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_slide_metadata" class="doc_header"><code>get_slide_metadata</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L100" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_slide_metadata</code>(<strong><code>sl_meta_url</code></strong>, <strong><code>approach</code></strong>=<em><code>'json'</code></em>)</p>
+<h4 id="get_slide_metadata" class="doc_header"><code>get_slide_metadata</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L113" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_slide_metadata</code>(<strong><code>sl_meta_url</code></strong>, <strong><code>approach</code></strong>=<em><code>'json'</code></em>)</p>
 </blockquote>
 <p>Processes metadata of slides associated with a SlidesLive presentation.</p>
 <p><code>approach</code> is one of <code>json</code> or <code>xml</code>.
@@ -295,7 +291,7 @@ JSON (<code>approach='json'</code>, <em>default</em>) format.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_urls" class="doc_header"><code>get_urls</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L126" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_urls</code>(<strong><code>video_id</code></strong>, <strong><code>slide_meta</code></strong>, <strong><code>slide_type</code></strong>=<em><code>'big'</code></em>, <strong><code>slide</code></strong>=<em><code>(None, None)</code></em>, <strong><code>time</code></strong>=<em><code>(None, None)</code></em>)</p>
+<h4 id="get_urls" class="doc_header"><code>get_urls</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L139" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_urls</code>(<strong><code>video_id</code></strong>, <strong><code>slide_meta</code></strong>, <strong><code>slide_type</code></strong>=<em><code>'big'</code></em>, <strong><code>slide</code></strong>=<em><code>(None, None)</code></em>, <strong><code>time</code></strong>=<em><code>(None, None)</code></em>)</p>
 </blockquote>
 <p>Composes a list of URLs for slides of a given SlidesLive presentation.</p>
 <p><code>video_id</code> specifies the ID of a SlidesLive presentation.
@@ -389,7 +385,7 @@ https://cdn.slideslive.com/data/presentations/38956531/slides/big/01163.jpg
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="download_slides" class="doc_header"><code>download_slides</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L219" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>download_slides</code>(<strong><code>url_list</code></strong>, <strong><code>sleep_time</code></strong>=<em><code>0.2</code></em>, <strong><code>jobs</code></strong>=<em><code>16</code></em>, <strong><code>directory</code></strong>=<em><code>None</code></em>, <strong><code>technique</code></strong>=<em><code>'python'</code></em>)</p>
+<h4 id="download_slides" class="doc_header"><code>download_slides</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L232" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>download_slides</code>(<strong><code>url_list</code></strong>, <strong><code>sleep_time</code></strong>=<em><code>0.2</code></em>, <strong><code>jobs</code></strong>=<em><code>16</code></em>, <strong><code>directory</code></strong>=<em><code>None</code></em>, <strong><code>technique</code></strong>=<em><code>'python'</code></em>)</p>
 </blockquote>
 <p>Downloads files from a list of URLs (<code>url_list</code>).</p>
 <p>The destination directory is either <code>slides</code> created
@@ -499,7 +495,7 @@ and use the <code>technique='wget+parallel'</code> option.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ffmpeg_concat_script" class="doc_header"><code>ffmpeg_concat_script</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L290" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ffmpeg_concat_script</code>(<strong><code>slide_meta</code></strong>, <strong><code>slide_folder</code></strong>=<em><code>None</code></em>, <strong><code>last_duration</code></strong>=<em><code>None</code></em>, <strong><code>slide</code></strong>=<em><code>(None, None)</code></em>, <strong><code>time</code></strong>=<em><code>(None, None)</code></em>)</p>
+<h4 id="ffmpeg_concat_script" class="doc_header"><code>ffmpeg_concat_script</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L303" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ffmpeg_concat_script</code>(<strong><code>slide_meta</code></strong>, <strong><code>slide_folder</code></strong>=<em><code>None</code></em>, <strong><code>last_duration</code></strong>=<em><code>None</code></em>, <strong><code>slide</code></strong>=<em><code>(None, None)</code></em>, <strong><code>time</code></strong>=<em><code>(None, None)</code></em>)</p>
 </blockquote>
 <p>Builds an ffmpeg frame concatination string from slide metadata.
 Since the duration of the very last slide cannot be inferred,
@@ -604,7 +600,7 @@ file &#39;/home/runner/work/myslideslive/myslideslive/src/my_slides_dir/00794.jp
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="compose_ffmpeg_video" class="doc_header"><code>compose_ffmpeg_video</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L445" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>compose_ffmpeg_video</code>(<strong><code>ffmpeg_script</code></strong>, <strong><code>video_file</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="compose_ffmpeg_video" class="doc_header"><code>compose_ffmpeg_video</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L458" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>compose_ffmpeg_video</code>(<strong><code>ffmpeg_script</code></strong>, <strong><code>video_file</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Builds video slides from an ffmpeg script using the
 <code>ffmpeg -safe 0 -f concat -i ffmpeg_concat.txt -vsync vfr slides.mp4</code> command.</p>
@@ -685,7 +681,7 @@ execute this command from your terminal.</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-rw-r--r-- 1 runner docker 74490 Jul 10 19:32 slides.mp4
+<pre>-rw-r--r-- 1 runner docker 74490 Nov 11 05:31 slides.mp4
 </pre>
 </div>
 </div>
@@ -707,7 +703,7 @@ execute this command from your terminal.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SlidesLive" class="doc_header"><code>class</code> <code>SlidesLive</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L466" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SlidesLive</code>(<strong><code>video_url</code></strong>, <strong><code>slides_folder</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="SlidesLive" class="doc_header"><code>class</code> <code>SlidesLive</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L479" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SlidesLive</code>(<strong><code>video_url</code></strong>, <strong><code>slides_folder</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Simplifies SlidesLive interaction.</p>
 <p>Should be initialised with SlidesLive presentation URL (<code>video_url</code>).
@@ -743,7 +739,7 @@ Optionally, a destination folder for downloading slides may be specified
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="SlidesLive.get_slide_urls" class="doc_header"><code>SlidesLive.get_slide_urls</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L497" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.get_slide_urls</code>(<strong><code>slide_type</code></strong>=<em><code>'big'</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="SlidesLive.get_slide_urls" class="doc_header"><code>SlidesLive.get_slide_urls</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L510" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.get_slide_urls</code>(<strong><code>slide_type</code></strong>=<em><code>'big'</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Returns a list of slide URLs -- see <a href="/myslideslive/slideslive.html#get_urls"><code>get_urls</code></a> for more details.</p>
 
@@ -768,7 +764,7 @@ Optionally, a destination folder for downloading slides may be specified
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="SlidesLive.download_slides" class="doc_header"><code>SlidesLive.download_slides</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L521" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.download_slides</code>(<strong><code>slide_type</code></strong>=<em><code>'big'</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>, <strong><code>sleep_time</code></strong>=<em><code>0.2</code></em>, <strong><code>jobs</code></strong>=<em><code>16</code></em>, <strong><code>directory</code></strong>=<em><code>None</code></em>, <strong><code>technique</code></strong>=<em><code>'python'</code></em>)</p>
+<h4 id="SlidesLive.download_slides" class="doc_header"><code>SlidesLive.download_slides</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L534" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.download_slides</code>(<strong><code>slide_type</code></strong>=<em><code>'big'</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>, <strong><code>sleep_time</code></strong>=<em><code>0.2</code></em>, <strong><code>jobs</code></strong>=<em><code>16</code></em>, <strong><code>directory</code></strong>=<em><code>None</code></em>, <strong><code>technique</code></strong>=<em><code>'python'</code></em>)</p>
 </blockquote>
 <p>Downloads a collection of slides -- see <a href="/myslideslive/slideslive.html#get_urls"><code>get_urls</code></a> and <code>download_slide</code> for more details.</p>
 
@@ -793,7 +789,7 @@ Optionally, a destination folder for downloading slides may be specified
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="SlidesLive.get_ffmpeg_script" class="doc_header"><code>SlidesLive.get_ffmpeg_script</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L534" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.get_ffmpeg_script</code>(<strong><code>slide_folder</code></strong>=<em><code>None</code></em>, <strong><code>last_duration</code></strong>=<em><code>None</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="SlidesLive.get_ffmpeg_script" class="doc_header"><code>SlidesLive.get_ffmpeg_script</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L547" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.get_ffmpeg_script</code>(<strong><code>slide_folder</code></strong>=<em><code>None</code></em>, <strong><code>last_duration</code></strong>=<em><code>None</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Composes ffmpeg script -- see <a href="/myslideslive/slideslive.html#ffmpeg_concat_script"><code>ffmpeg_concat_script</code></a> for more details.</p>
 
@@ -818,7 +814,7 @@ Optionally, a destination folder for downloading slides may be specified
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="SlidesLive.compose_video" class="doc_header"><code>SlidesLive.compose_video</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L563" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.compose_video</code>(<strong><code>video_file</code></strong>=<em><code>None</code></em>, <strong><code>slide_folder</code></strong>=<em><code>None</code></em>, <strong><code>last_duration</code></strong>=<em><code>None</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="SlidesLive.compose_video" class="doc_header"><code>SlidesLive.compose_video</code><a href="https://github.com/So-Cool/myslideslive/tree/master/myslideslive/slideslive.py#L576" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>SlidesLive.compose_video</code>(<strong><code>video_file</code></strong>=<em><code>None</code></em>, <strong><code>slide_folder</code></strong>=<em><code>None</code></em>, <strong><code>last_duration</code></strong>=<em><code>None</code></em>, <strong><code>slide</code></strong>=<em><code>None</code></em>, <strong><code>time</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Builds slides video -- see <a href="/myslideslive/slideslive.html#ffmpeg_concat_script"><code>ffmpeg_concat_script</code></a> and <a href="/myslideslive/slideslive.html#compose_ffmpeg_video"><code>compose_ffmpeg_video</code></a> for more details.</p>
 
@@ -962,7 +958,7 @@ Extracted time segment in seconds:
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-rw-r--r-- 1 runner docker 51806 Jul 10 19:32 beyond-static-papers.mp4
+<pre>-rw-r--r-- 1 runner docker 51806 Nov 11 05:31 beyond-static-papers.mp4
 </pre>
 </div>
 </div>
