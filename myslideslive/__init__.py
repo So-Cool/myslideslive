@@ -1,2 +1,2 @@
-__version__ = "0.1.post1"
+__version__ = "0.2"
 from myslideslive.slideslive import SlidesLive
