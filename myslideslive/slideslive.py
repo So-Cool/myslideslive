@@ -65,8 +65,26 @@ def get_sl_info(sl_id):
     sl_token = sl_token[0]
 
     info_url = SL_INFO.format(id=sl_id, token=sl_token)
-    info_request = requests.get(info_url)
-    info_json = json.loads(info_request.content.decode())
+    info_request = requests.get(info_url).content.decode()
+
+    _m3u_header = '#EXTM3U'
+    if info_request.startswith(_m3u_header):
+        info_request_list = info_request.split('\n')
+        assert info_request_list[0] == _m3u_header
+        del info_request_list[0]
+
+        info_json = {}
+        for i in info_request_list:
+            assert ':' in i
+            i = i.split(':')
+            key, val = i[0], ':'.join(i[1:])
+            for pre in ['#EXT-SL-PRESENTATION-', '#EXT-SL-VOD-', '#EXT-SL-']:
+                if key.startswith(pre):
+                    key = key[len(pre):].lower().replace('-', '_')
+            assert key not in info_json
+            info_json[key] = val
+    else:
+        info_json = json.loads(info_request)
 
     return info_json
 
