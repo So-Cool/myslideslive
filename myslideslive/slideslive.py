@@ -517,12 +517,12 @@ class SlidesLive():
         self.video_id, self.video_name = url2id(video_url)
         self.video_description = get_sl_info(self.video_id)
 
-        if 'slides_json_url' in self.video_description:
-            meta = get_slide_metadata(
-                self.video_description['slides_json_url'], approach='json')
-        else:
+        if 'slides_xml_url' in self.video_description:
             meta = get_slide_metadata(
                 self.video_description['slides_xml_url'], approach='xml')
+        else:
+            meta = get_slide_metadata(
+                self.video_description['slides_json_url'], approach='json')
         self.video_metadata = meta
 
     def get_slide_urls(self, slide_type='big', slide=None, time=None):
