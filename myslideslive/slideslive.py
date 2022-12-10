@@ -145,7 +145,7 @@ def get_slide_metadata(sl_meta_url, approach='json'):
     else:
         assert approach == 'xml'
         meta_data_ = parse_slide_xml(meta_content)
-        meta_data_ = {int(d['orderId']): {'time': int(d['time']),
+        meta_data_ = {int(d['orderId']): {'time': int(float(d['time'])),
                                           'type': 'image',
                                           'image': {'name': d['slideName']}}
                       for d in meta_data_}
