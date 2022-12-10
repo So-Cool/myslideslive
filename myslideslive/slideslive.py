@@ -20,7 +20,7 @@ from xml.etree import ElementTree
 # Cell
 #export
 # Parse SlidesLive URL
-_SL_REGEX_STR = ('https://slideslive\\.(?:com|de)/'
+_SL_REGEX_STR = ('https?://slideslive\\.(?:com|de)/'
                  '(?P<id>\\d+)'
                  '/*'
                  '(?P<name>.*)')
