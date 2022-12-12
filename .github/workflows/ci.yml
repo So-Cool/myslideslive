@@ -3,19 +3,19 @@ on: [push, pull_request]
 jobs:
   build-n-test:
     name: Run Continuous Integration ☯️ scripts
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout code 🛎️
-      uses: actions/checkout@v2.3.1
+      uses: actions/checkout@v3
     - name: Set up Python 3.6 🐍
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
       with:
         python-version: 3.6
         architecture: x64
     - name: Install build dependencies 💾
       run: |
         sudo apt-get install ffmpeg
-        pip install nbdev jupyter
+        pip install "nbdev<2" jupyter
     - name: Check readability of all notebooks 📖
       run: nbdev_read_nbs
     - name: Build 🏗️ and install 💽 the library
@@ -40,13 +40,13 @@ jobs:
 
   build-n-publish:
     name: Build and publish Python 🐍 distributions 📦 to PyPI
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     needs: [build-n-test]
     steps:
     - name: Checkout code 🛎️
-      uses: actions/checkout@v2.3.1
+      uses: actions/checkout@v3
     - name: Set up Python 3.6 🐍
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
       with:
         python-version: 3.6
         architecture: x64
@@ -62,22 +62,22 @@ jobs:
 
   build-n-publish-docs:
     name: Build 🔧 the docs 📖 and publish 🚀 them to GitHub Pages
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     needs: [build-n-test]
     steps:
     - name: Checkout code 🛎️
-      uses: actions/checkout@v2.3.1
+      uses: actions/checkout@v3
       with:
         persist-credentials: false
     - name: Set up Python 3.6 🐍
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
       with:
         python-version: 3.6
         architecture: x64
     - name: Install dependencies 💾
       run: |
         sudo apt-get install ffmpeg
-        pip install nbdev jupyter
+        pip install "nbdev<2" jupyter
         pip install .
     - name: Execute the notebooks 📖
       run: |
@@ -85,7 +85,7 @@ jobs:
         jupyter nbconvert --execute --inplace src/*.ipynb
     - name: Build 🔧 the docs 📖
       run: |
-        pip install nbdev  # NOTE: notebook execution issue
+        pip install "nbdev<2"  # NOTE: notebook execution issue
         nbdev_build_lib  # needed to generate _config.yml
         nbdev_build_docs
         cp LICENSE docs/
