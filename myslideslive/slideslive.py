@@ -20,7 +20,7 @@ from xml.etree import ElementTree
 # Cell
 #export
 # Parse SlidesLive URL
-_SL_REGEX_STR = ('https://slideslive\\.(?:com|de)/'
+_SL_REGEX_STR = ('https?://slideslive\\.(?:com|de)/'
                  '(?P<id>\\d+)'
                  '/*'
                  '(?P<name>.*)')
@@ -145,7 +145,7 @@ def get_slide_metadata(sl_meta_url, approach='json'):
     else:
         assert approach == 'xml'
         meta_data_ = parse_slide_xml(meta_content)
-        meta_data_ = {int(d['orderId']): {'time': int(d['time']),
+        meta_data_ = {int(d['orderId']): {'time': int(float(d['time'])),
                                           'type': 'image',
                                           'image': {'name': d['slideName']}}
                       for d in meta_data_}
@@ -229,6 +229,7 @@ def get_urls(video_id, slide_meta, slide_type='big',
                     video_id=video_id,
                     slide_type=slide_type,
                     slide_id=s[i]['image']['name']))
+        # TODO: i may be undefined for only one slide (see line #466)
         else:  # handle the last slide
             t_start = int(s[i + 1]['time'] / 1000)  # inclusive
             t_end = None  # exclusive
@@ -384,6 +385,7 @@ def ffmpeg_concat_script(slide_meta, slide_folder=None, last_duration=None,
 
                 glob_start = t_start / 1000 if glob_start is None else glob_start
                 glob_end = t_end / 1000
+        # TODO: i may be undefined for only one slide (see line #466)
         else:
             i_ = i + 2
             if i_ >= lower_bound and i_ <= upper_bound:
@@ -427,6 +429,7 @@ def ffmpeg_concat_script(slide_meta, slide_folder=None, last_duration=None,
 
                 glob_start = t_start_ / 1000 if glob_start is None else glob_start
                 glob_end = t_end_ / 1000
+        # TODO: i may be undefined for only one slide (see line #466)
         else:  # handle the last slide
             t_start = int(slide_meta['slides'][i + 1]['time'] / 1000)  # inclusive
             t_end = None  # exclusive
@@ -448,7 +451,8 @@ def ffmpeg_concat_script(slide_meta, slide_folder=None, last_duration=None,
                 glob_start = t_start_ if glob_start is None else glob_start
                 glob_end = t_start_ + duration
     else:
-        for i in range(len(slide_meta['slides']) - 1):
+        _slides_iter = len(slide_meta['slides']) - 1
+        for i in range(_slides_iter):
             i_ = i + 1
             t_start = slide_meta['slides'][i]['time']
             t_end = slide_meta['slides'][i_]['time']
@@ -459,6 +463,10 @@ def ffmpeg_concat_script(slide_meta, slide_folder=None, last_duration=None,
 
             glob_start = t_start / 1000 if glob_start is None else glob_start
         else:
+            if not _slides_iter:
+                i = -1
+                assert slide_meta['slides'][i + 1]['time'] == 0
+                glob_start = 0.0
             f = _slide_exists(slide_meta['slides'][i + 1]['image']['name'])
             last_duration = 5 if last_duration is None else last_duration
             ffmpeg += [f"file '{f}'", f'duration {last_duration:.3f}']
@@ -485,13 +493,28 @@ def compose_ffmpeg_video(ffmpeg_script, video_file=None):
     if os.path.exists(video_file):
         raise RuntimeError(f'{video_file} video file already exists.')
 
-    with tempfile.NamedTemporaryFile(mode='w') as tf:
-        tf.write(ffmpeg_script)
-        tf.seek(0)
+    ffmpeg_script_list = ffmpeg_script.split('\n')
+    assert len(ffmpeg_script_list) > 2, '3 elements constitute a single frame'
+    if len(ffmpeg_script_list) == 3:
+        img = ffmpeg_script_list[0]
+        assert img.startswith("file '") and img.endswith("'")
+        img = img[6:-1]
 
-        # -pix_fmt yuv420p
-        stream = os.popen(f'ffmpeg -safe 0 -f concat -i {tf.name} -vsync vfr {video_file}')
+        duration = ffmpeg_script_list[1]
+        assert duration.startswith('duration ')
+        duration = duration[9:]
+
+        # -c:v libx264
+        stream = os.popen(f'ffmpeg -loop 1 -i {img} -t {duration} {video_file}')
         print(stream.read())
+    else:
+        with tempfile.NamedTemporaryFile(mode='w') as tf:
+            tf.write(ffmpeg_script)
+            tf.seek(0)
+
+            # -pix_fmt yuv420p
+            stream = os.popen(f'ffmpeg -safe 0 -f concat -i {tf.name} -vsync vfr {video_file}')
+            print(stream.read())
 
 # Cell
 class SlidesLive():
@@ -517,12 +540,12 @@ class SlidesLive():
         self.video_id, self.video_name = url2id(video_url)
         self.video_description = get_sl_info(self.video_id)
 
-        if 'slides_json_url' in self.video_description:
-            meta = get_slide_metadata(
-                self.video_description['slides_json_url'], approach='json')
-        else:
+        if 'slides_xml_url' in self.video_description:
             meta = get_slide_metadata(
                 self.video_description['slides_xml_url'], approach='xml')
+        else:
+            meta = get_slide_metadata(
+                self.video_description['slides_json_url'], approach='json')
         self.video_metadata = meta
 
     def get_slide_urls(self, slide_type='big', slide=None, time=None):
