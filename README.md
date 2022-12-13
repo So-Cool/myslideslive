@@ -54,7 +54,7 @@ https://slideslive.com/38956531/beyond-static-papers-rethinking-how-we-share-sci
 ```
 
 ## Development
-- To develop this package you need [nbdev].
+- To develop this package you need [nbdev] v1 (`pip install "nbdev<2"`).
 - The library (and `Makefile`) is built with `nbdev_build_lib`.
 - `nbdev_update_lib` updates the notebooks based on changes in the library.
 - The `README.md` is regenerated with `nbdev_build_docs`.
