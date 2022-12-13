@@ -229,6 +229,7 @@ def get_urls(video_id, slide_meta, slide_type='big',
                     video_id=video_id,
                     slide_type=slide_type,
                     slide_id=s[i]['image']['name']))
+        # TODO: i may be undefined for only one slide (see line #466)
         else:  # handle the last slide
             t_start = int(s[i + 1]['time'] / 1000)  # inclusive
             t_end = None  # exclusive
@@ -384,6 +385,7 @@ def ffmpeg_concat_script(slide_meta, slide_folder=None, last_duration=None,
 
                 glob_start = t_start / 1000 if glob_start is None else glob_start
                 glob_end = t_end / 1000
+        # TODO: i may be undefined for only one slide (see line #466)
         else:
             i_ = i + 2
             if i_ >= lower_bound and i_ <= upper_bound:
@@ -427,6 +429,7 @@ def ffmpeg_concat_script(slide_meta, slide_folder=None, last_duration=None,
 
                 glob_start = t_start_ / 1000 if glob_start is None else glob_start
                 glob_end = t_end_ / 1000
+        # TODO: i may be undefined for only one slide (see line #466)
         else:  # handle the last slide
             t_start = int(slide_meta['slides'][i + 1]['time'] / 1000)  # inclusive
             t_end = None  # exclusive
@@ -448,7 +451,8 @@ def ffmpeg_concat_script(slide_meta, slide_folder=None, last_duration=None,
                 glob_start = t_start_ if glob_start is None else glob_start
                 glob_end = t_start_ + duration
     else:
-        for i in range(len(slide_meta['slides']) - 1):
+        _slides_iter = len(slide_meta['slides']) - 1
+        for i in range(_slides_iter):
             i_ = i + 1
             t_start = slide_meta['slides'][i]['time']
             t_end = slide_meta['slides'][i_]['time']
@@ -459,6 +463,10 @@ def ffmpeg_concat_script(slide_meta, slide_folder=None, last_duration=None,
 
             glob_start = t_start / 1000 if glob_start is None else glob_start
         else:
+            if not _slides_iter:
+                i = -1
+                assert slide_meta['slides'][i + 1]['time'] == 0
+                glob_start = 0.0
             f = _slide_exists(slide_meta['slides'][i + 1]['image']['name'])
             last_duration = 5 if last_duration is None else last_duration
             ffmpeg += [f"file '{f}'", f'duration {last_duration:.3f}']
