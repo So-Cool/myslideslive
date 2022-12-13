@@ -485,13 +485,28 @@ def compose_ffmpeg_video(ffmpeg_script, video_file=None):
     if os.path.exists(video_file):
         raise RuntimeError(f'{video_file} video file already exists.')
 
-    with tempfile.NamedTemporaryFile(mode='w') as tf:
-        tf.write(ffmpeg_script)
-        tf.seek(0)
+    ffmpeg_script_list = ffmpeg_script.split('\n')
+    assert len(ffmpeg_script_list) > 2, '3 elements constitute a single frame'
+    if len(ffmpeg_script_list) == 3:
+        img = ffmpeg_script_list[0]
+        assert img.startswith("file '") and img.endswith("'")
+        img = img[6:-1]
 
-        # -pix_fmt yuv420p
-        stream = os.popen(f'ffmpeg -safe 0 -f concat -i {tf.name} -vsync vfr {video_file}')
+        duration = ffmpeg_script_list[1]
+        assert duration.startswith('duration ')
+        duration = duration[9:]
+
+        # -c:v libx264
+        stream = os.popen(f'ffmpeg -loop 1 -i {img} -t {duration} {video_file}')
         print(stream.read())
+    else:
+        with tempfile.NamedTemporaryFile(mode='w') as tf:
+            tf.write(ffmpeg_script)
+            tf.seek(0)
+
+            # -pix_fmt yuv420p
+            stream = os.popen(f'ffmpeg -safe 0 -f concat -i {tf.name} -vsync vfr {video_file}')
+            print(stream.read())
 
 # Cell
 class SlidesLive():
