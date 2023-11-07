@@ -40,7 +40,7 @@ jobs:
 
   build-n-publish:
     name: Build and publish Python 🐍 distributions 📦 to PyPI
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: [build-n-test]
     steps:
     - name: Checkout code 🛎️
@@ -62,7 +62,7 @@ jobs:
 
   build-n-publish-docs:
     name: Build 🔧 the docs 📖 and publish 🚀 them to GitHub Pages
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: [build-n-test]
     steps:
     - name: Checkout code 🛎️
