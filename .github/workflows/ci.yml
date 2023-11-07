@@ -3,14 +3,14 @@ on: [push, pull_request]
 jobs:
   build-n-test:
     name: Run Continuous Integration ☯️ scripts
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout code 🛎️
       uses: actions/checkout@v3
-    - name: Set up Python 3.6 🐍
+    - name: Set up Python 3.7 🐍
       uses: actions/setup-python@v4
       with:
-        python-version: 3.6
+        python-version: 3.7
         architecture: x64
     - name: Install build dependencies 💾
       run: |
@@ -40,15 +40,15 @@ jobs:
 
   build-n-publish:
     name: Build and publish Python 🐍 distributions 📦 to PyPI
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: [build-n-test]
     steps:
     - name: Checkout code 🛎️
       uses: actions/checkout@v3
-    - name: Set up Python 3.6 🐍
+    - name: Set up Python 3.7 🐍
       uses: actions/setup-python@v4
       with:
-        python-version: 3.6
+        python-version: 3.7
         architecture: x64
     - name: Install build dependencies 💾
       run: pip install wheel
@@ -62,17 +62,17 @@ jobs:
 
   build-n-publish-docs:
     name: Build 🔧 the docs 📖 and publish 🚀 them to GitHub Pages
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: [build-n-test]
     steps:
     - name: Checkout code 🛎️
       uses: actions/checkout@v3
       with:
         persist-credentials: false
-    - name: Set up Python 3.6 🐍
+    - name: Set up Python 3.7 🐍
       uses: actions/setup-python@v4
       with:
-        python-version: 3.6
+        python-version: 3.7
         architecture: x64
     - name: Install dependencies 💾
       run: |

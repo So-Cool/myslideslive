@@ -22,3 +22,8 @@ src/.last_checked
 
 # package
 Makefile
+
+# artefacts
+*.png
+*.jpg
+*.mp4

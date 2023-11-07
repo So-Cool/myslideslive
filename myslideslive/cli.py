@@ -12,7 +12,7 @@ from .slideslive import SlidesLive
 parser = argparse.ArgumentParser(description='Take care of your SlidesLive slides...')
 
 parser.add_argument('url', type=str, help='SlidesLive URL', nargs=1)
-parser.add_argument('--size', default='big', type=str, help='Slide size: medium or big')
+parser.add_argument('--size', default='xlarge', type=str, help='Slide size: small, medium, large or xlarge')
 parser.add_argument('--waittime', default=0.2, type=float, help='Seconds to wait after downloading each slide')
 parser.add_argument('--lastduration', default=None, type=int, help='The duration of last slide in seconds')
 
@@ -30,8 +30,8 @@ parser.add_argument('--slide', default=None,
 def main():
     """Defines command line interface."""
     args = parser.parse_args()
-    if args.size not in ('big', 'medium'):
-        raise RuntimeError('The slide size can only be *big* or *medium*.')
+    if args.size not in ('small', 'medium', 'large', 'xlarge'):
+        raise RuntimeError('The slide size can only be *small*, *medium*, *large* or *xlarge*.')
 
     if args.slide is not None:
         assert len(args.slide) == 2
