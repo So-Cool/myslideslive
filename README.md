@@ -52,6 +52,7 @@ https://slideslive.com/38956531/beyond-static-papers-rethinking-how-we-share-sci
 - `nbdev_update_lib` updates the notebooks based on changes in the library.
 - The `README.md` is regenerated with `nbdev_build_docs`.
 - The git hooks are set up with `nbdev_install_git_hooks`.
+- `jupyter nbconvert --clear-output --inplace notebook.ipynb` clears all output cells of a notebook.
 
 Before commiting code changes make sure to run:
 ```bash
