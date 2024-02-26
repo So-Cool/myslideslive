@@ -36,7 +36,7 @@ SL_HTML = 'https://slideslive.com/{id}'
 SL_CDN = 'https://cdn.slideslive.com/data/presentations/{video_id}/slides/{slide_type}/{slide_id}.jpg'
 YODA_CDN = 'https://d2ygwrecguqg66.cloudfront.net/data/presentations/{id}/{data}'
 # f is file format; can be webp/png. h is height; can be 432/540/720/1080.
-RS_CDN = 'https://rs.slideslive.com/{video_id}/slides/{slide_id}.png?h={slide_type}&f=png'  # can be .webp as well # slide_type is size
+RS_CDN = 'https://rs.slideslive.com/{video_id}/slides/{slide_id}.{format}?h={slide_type}&f={format}'  # can be .png or .webp # slide_type is size
 # e.g.: https://d2ygwrecguqg66.cloudfront.net/data/presentations/38956531/slides/big/00793.jpg
 #       https://d2ygwrecguqg66.cloudfront.net/data/presentations/38956531/v1/38956531.xml
 #       https://d2ygwrecguqg66.cloudfront.net/data/presentations/38956531/v1/slides.json
@@ -46,7 +46,7 @@ SIZE_MAP = {'small':432, 'medium':540, 'large':720, 'xlarge':1080}
 
 # Cell
 def url2id(sl_url):
-    """Convers SlidesLive URL to presentation ID and name."""
+    """Converts SlidesLive URL to presentation ID and name."""
     sl_url_match = SL_REGEX.search(sl_url)
     if sl_url_match is None or not sl_url_match.group('id'):
         raise Exception('Could not parse the SlidesLive URL.')
@@ -145,6 +145,9 @@ def get_slide_metadata(sl_meta_url, approach='json'):
         raise ValueError('The approach can either be *json* or *xml*.')
 
     meta_request = requests.get(sl_meta_url)
+    if not meta_request.ok:
+        raise RuntimeError(f'Request failed ({sl_meta_url})')
+
     meta_content = meta_request.content.decode()
     if approach == 'json':
         meta_data = json.loads(meta_content)
@@ -160,7 +163,7 @@ def get_slide_metadata(sl_meta_url, approach='json'):
     return meta_data
 
 # Cell
-def get_urls(video_id, slide_meta, slide_type='xlarge',
+def get_urls(video_id, slide_meta, slide_type='xlarge', slide_format='png',
              slide=(None, None), time=(None, None)):
     """
     Composes a list of URLs for slides of a given SlidesLive presentation.
@@ -169,6 +172,7 @@ def get_urls(video_id, slide_meta, slide_type='xlarge',
     `slide_meta` is the metadata of a SlidesLive presentation
     as given by the `get_slide_metadata` function.
     `slide_type` specifies the size of the slide.
+    `slide_format` specifies the image format of the slide.
 
     A subset of slides may be extracted with this function using either
     the `slide` or `time` parameter (but not both simultaneously).
@@ -197,8 +201,13 @@ def get_urls(video_id, slide_meta, slide_type='xlarge',
         raise RuntimeError('Both slide and time bounds cannot be used simultaneously.')
 
     if slide_type not in SIZE_MAP:
-        raise ValueError(f'The slide type (slide_type={slide_type}) is not recognised.')
+        _vals = [f'"{i}"' for i in sorted(list(SIZE_MAP.keys()))]
+        raise ValueError(f'The slide type (slide_type={slide_type}) can only '
+                         f'be one of the following: {", ".join(_vals)}.')
     slide_size = SIZE_MAP[slide_type]
+
+    if slide_format not in ('png', 'webp'):
+        raise ValueError(f'The slide format (slide_format={slide_format}) can either be "png" or "webp".')
 
     slides = []
     if slide_given:
@@ -210,7 +219,8 @@ def get_urls(video_id, slide_meta, slide_type='xlarge',
                 slides.append(RS_CDN.format(
                     video_id=video_id,
                     slide_type=slide_size,
-                    slide_id=s['image']['name']))
+                    slide_id=s['image']['name'],
+                    format=s['image'].get('extname', slide_format).strip('.')))
     elif time_given:
         lower_bound = -float('inf') if time[0] is None else time[0]
         upper_bound = float('inf') if time[1] is None else time[1]
@@ -234,7 +244,8 @@ def get_urls(video_id, slide_meta, slide_type='xlarge',
                 slides.append(RS_CDN.format(
                     video_id=video_id,
                     slide_type=slide_size,
-                    slide_id=s[i]['image']['name']))
+                    slide_id=s[i]['image']['name'],
+                    format=s[i]['image'].get('extname', slide_format).strip('.')))
         # TODO: i may be undefined for only one slide (see line #466)
         else:  # handle the last slide
             t_start = int(s[i + 1]['time'] / 1000)  # inclusive
@@ -244,11 +255,13 @@ def get_urls(video_id, slide_meta, slide_type='xlarge',
                 slides.append(RS_CDN.format(
                     video_id=video_id,
                     slide_type=slide_size,
-                    slide_id=s[i + 1]['image']['name']))
+                    slide_id=s[i + 1]['image']['name'],
+                    format=s[i + 1]['image'].get('extname', slide_format).strip('.')))
     else:
         slides = [RS_CDN.format(video_id=video_id,
                                 slide_type=slide_size,
-                                slide_id=s['image']['name'])
+                                slide_id=s['image']['name'],
+                                format=s['image'].get('extname', slide_format).strip('.'))
                   for s in slide_meta['slides']]
 
     return slides
@@ -290,7 +303,7 @@ def download_slides(url_list, sleep_time=.2, jobs=16,
         if not os.path.isdir(slides_dir):
             raise RuntimeError(
                 'The slides destination is a file '
-                f'and not adirectory.\n({slides_dir})')
+                f'and not a directory.\n({slides_dir})')
     else:
         os.mkdir(slides_dir)
 
@@ -552,12 +565,38 @@ class SlidesLive():
         self.video_id, self.video_name = url2id(video_url)
         self.video_description = get_sl_info(self.video_id)
 
-        if 'slides_xml_url' in self.video_description:
-            meta = get_slide_metadata(
-                self.video_description['slides_xml_url'], approach='xml')
+        # try XML approach first
+        try_xml = True
+        if 'slides_xml_url' in self.video_description and try_xml:
+            try:
+                meta = get_slide_metadata(
+                    self.video_description['slides_xml_url'], approach='xml')
+            except RuntimeError as e:
+                if str(e) == f'Request failed ({self.video_description["slides_xml_url"]})':
+                    try_xml = False
+                else:
+                    raise e
         else:
-            meta = get_slide_metadata(
-                self.video_description['slides_json_url'], approach='json')
+            try_xml = False
+
+        # try JSON approach if XML failed
+        try_json = True
+        if 'slides_json_url' in self.video_description and not try_xml:
+            try:
+                meta = get_slide_metadata(
+                    self.video_description['slides_json_url'], approach='json')
+            except RuntimeError as e:
+                if str(e) == f'Request failed ({self.video_description["slides_json_url"]})':
+                    try_json = False
+                else:
+                    raise e
+        else:
+            try_json = False
+
+        # raise an error if both failed
+        if not try_xml and not try_json:
+            raise RuntimeError('Failed to retrieve XML or JSON slides metadata')
+
         self.video_metadata = meta
 
     def get_slide_urls(self, slide_type='xlarge', slide=None, time=None):
