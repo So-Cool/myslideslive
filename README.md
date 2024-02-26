@@ -54,7 +54,7 @@ https://slideslive.com/38956531/beyond-static-papers-rethinking-how-we-share-sci
 - The git hooks are set up with `nbdev_install_git_hooks`.
 - `jupyter nbconvert --clear-output --inplace notebook.ipynb` clears all output cells of a notebook.
 
-Before commiting code changes make sure to run:
+Before committing code changes make sure to run:
 ```bash
 nbdev_install_git_hooks && \
 nbdev_build_lib && \
